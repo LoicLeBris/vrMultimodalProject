@@ -60,12 +60,12 @@ public class Grab : MonoBehaviour
 
     private void StartGrab()
     {
-        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, 8f, whatIsGrabbable);
+        RaycastHit[] hits = Physics.RaycastAll(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), 8f, whatIsGrabbable);
+        // cam.transform.GetComponent<CameraCollisionCheck>().DrawRay(cam.transform.position, cam.transform.forward * 8f);
         if (hits.Length < 1)
         {
             return;
         }
-
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i].transform.GetComponent<Rigidbody>())

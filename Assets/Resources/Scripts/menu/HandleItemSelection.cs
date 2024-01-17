@@ -27,13 +27,17 @@ public class ItemSelection : MonoBehaviour
     {
         GameObject cube = new GameObject("MyNewItem");
         cube.AddComponent<BoxCollider>();
+        BoxCollider boxCollider = cube.GetComponent<BoxCollider>();
+        if (boxCollider != null)
+        {
+            boxCollider.size = new Vector3(2f, 2f, 2f);
+        }
         MeshFilter meshFilter = cube.AddComponent<MeshFilter>();
         meshFilter.mesh = GetCubeMesh();
-
         MeshRenderer meshRenderer = cube.AddComponent<MeshRenderer>();
         meshRenderer.material = GetCubeMaterial();
-
-        Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>();
+        cube.layer = LayerMask.NameToLayer("Grabbable");
+        Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>(); 
         cubeRigidbody.mass = 1f; 
         
         cube.transform.position = new Vector3(5f, 0.5f, 2f);
