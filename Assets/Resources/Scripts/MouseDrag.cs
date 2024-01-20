@@ -22,10 +22,17 @@ public class MouseDrag : MonoBehaviour
         Vector3 mousePosition = new Vector3(Input.mousePosition.y*5, Input.mousePosition.x*3, Camera.main.transform.position.z*5);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) + offset;
         transform.position = objPosition;
+       
     }
 
     private void OnMouseUp()
     {
         rb.isKinematic = false;
+    }
+
+     private void Update()
+    {
+        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
+        transform.Translate(Vector3.up * wheelInput * 5.0f, Space.World);
     }
 }
