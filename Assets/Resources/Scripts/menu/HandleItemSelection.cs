@@ -13,14 +13,42 @@ public class ItemSelection : MonoBehaviour
     {
         selectedItemIndex = index;
         Debug.Log("Selected item: " + selectedItemIndex);
-        InstantiateNewObject(selectedItemIndex);
+        InstantiateNewSquare(selectedItemIndex);
     }
 
     public void InstantiateNewObject(int index)
+    {
+        if (itemsDictionary.ContainsKey(index))
+        {
+            Destroy(itemsDictionary[index].GetComponent<Rigidbody>());
+        }
+        else
+        {
+            GameObject cube = new GameObject("MyNewItem");
+            cube.AddComponent<BoxCollider>();
+            BoxCollider boxCollider = cube.GetComponent<BoxCollider>();
+        
+            MeshFilter meshFilter = cube.AddComponent<MeshFilter>();
+            meshFilter.mesh = GetCubeMesh();
+            MeshRenderer meshRenderer = cube.AddComponent<MeshRenderer>();
+            meshRenderer.material = GetCubeMaterial();
+            cube.layer = LayerMask.NameToLayer("Grabbable");
+            Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>(); 
+            cubeRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            cubeRigidbody.mass = 1f; 
+            cube.AddComponent<MouseDrag>();
+            cube.transform.position = new Vector3(5f, 0.5f, 2f);
+
+            itemsDictionary.Add(index, cube);
+        }
+    }
+
+public void InstantiateNewSquare(int index)
 {
     if (itemsDictionary.ContainsKey(index))
     {
-        Destroy(itemsDictionary[index].GetComponent<Rigidbody>());
+        Destroy(itemsDictionary[index]);
+        itemsDictionary.Remove(index);
     }
     else
     {

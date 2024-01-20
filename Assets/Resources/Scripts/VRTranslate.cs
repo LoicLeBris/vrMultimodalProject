@@ -7,8 +7,8 @@ public class VRTranslate : MonoBehaviour
 {
     // Calculate the distance of the user from the center of the area
     public float translate_gain = 1.26f;
-    public float rotation_gain = 1.24f;
-    public float curvature_gain = 0.045f;
+    public float rotation_gain = 1.5f;
+    public float curvature_gain = 0.1f;
 
     public float m_speed = 0.1f;
     public float r_speed = 0.3f;
@@ -59,11 +59,11 @@ public class VRTranslate : MonoBehaviour
 
     void smartUserDisplace(float trans=0.0f, float rot =0.0f)
     {
-        // float distanceFromCenter = Vector3.Distance(new Vector3(playerReal.transform.position.x, 0, playerReal.transform.position.z), Vector3.zero);
+        float distanceFromCenter = Vector3.Distance(new Vector3(playerReal.transform.position.x, 0, playerReal.transform.position.z), Vector3.zero);
 
-        // // Adjust translation and rotation gains based on the distance
-        // float translate_gain = Mathf.Lerp(0.86f, 1.26f, distanceFromCenter / (10 / 2));
-        // float rotation_gain = Mathf.Lerp(0.67f, 1.24f, distanceFromCenter / (10 / 2));
+        // Adjust translation and rotation gains based on the distance
+        float translate_gain = Mathf.Lerp(0.86f, 1.26f, distanceFromCenter / (10 / 2));
+        float rotation_gain = Mathf.Lerp(0.67f, 1.24f, distanceFromCenter / (10 / 2));
 
         translateUser(trans);
         rotateUser(rot);
