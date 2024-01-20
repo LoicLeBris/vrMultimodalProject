@@ -13,7 +13,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        transform.Rotate(Vector3.up * mouseX);
+        // float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        // transform.Rotate(Vector3.up * mouseX);
     }
 }
