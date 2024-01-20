@@ -8,38 +8,48 @@ public class ItemSelection : MonoBehaviour
 {
     public Dictionary<int, GameObject> itemsDictionary = new Dictionary<int, GameObject>();
     private int selectedItemIndex = -1;
+    public GameObject prefabToSpawn; 
 
     public void SelectItem(int index)
     {
-        selectedItemIndex = index;
-        Debug.Log("Selected item: " + selectedItemIndex);
-        InstantiateNewSquare(selectedItemIndex);
+
+        switch (index)
+        {
+            case 0:
+                prefabToSpawn = Resources.Load("CombatKnifes/knife3a") as GameObject;
+                InstantiateNewObject(index, prefabToSpawn);
+                break;
+            default:
+                InstantiateNewSquare(index);
+                break;
+        }
     }
 
-    public void InstantiateNewObject(int index)
+    public void InstantiateNewObject(int index, GameObject prefabToSpawn)
     {
         if (itemsDictionary.ContainsKey(index))
         {
-            Destroy(itemsDictionary[index].GetComponent<Rigidbody>());
+            Destroy(itemsDictionary[index]);
+            itemsDictionary.Remove(index);
         }
         else
         {
-            GameObject cube = new GameObject("MyNewItem");
-            cube.AddComponent<BoxCollider>();
-            BoxCollider boxCollider = cube.GetComponent<BoxCollider>();
-        
-            MeshFilter meshFilter = cube.AddComponent<MeshFilter>();
-            meshFilter.mesh = GetCubeMesh();
-            MeshRenderer meshRenderer = cube.AddComponent<MeshRenderer>();
-            meshRenderer.material = GetCubeMaterial();
-            cube.layer = LayerMask.NameToLayer("Grabbable");
-            Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>(); 
-            cubeRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            cubeRigidbody.mass = 1f; 
-            cube.AddComponent<MouseDrag>();
-            cube.transform.position = new Vector3(5f, 0.5f, 2f);
+            GameObject newObject = Instantiate(prefabToSpawn, new Vector3(5f, 0.5f, 2f), Quaternion.identity);
 
-            itemsDictionary.Add(index, cube);
+            newObject.name = "MyNewItem";
+            newObject.layer = LayerMask.NameToLayer("Grabbable");
+
+            Rigidbody objectRigidbody = newObject.GetComponent<Rigidbody>();
+            if (objectRigidbody == null)
+            {
+                objectRigidbody = newObject.AddComponent<Rigidbody>();
+                objectRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                objectRigidbody.mass = 1f;
+            }
+
+            newObject.AddComponent<MouseDrag>();
+
+            itemsDictionary.Add(index, newObject);
         }
     }
 
@@ -55,7 +65,7 @@ public void InstantiateNewSquare(int index)
         GameObject cube = new GameObject("MyNewItem");
         cube.AddComponent<BoxCollider>();
         BoxCollider boxCollider = cube.GetComponent<BoxCollider>();
-      
+        boxCollider.size = new Vector3(1.1f, 1.1f, 1.1f);
         MeshFilter meshFilter = cube.AddComponent<MeshFilter>();
         meshFilter.mesh = GetCubeMesh();
         MeshRenderer meshRenderer = cube.AddComponent<MeshRenderer>();
@@ -64,6 +74,7 @@ public void InstantiateNewSquare(int index)
         Rigidbody cubeRigidbody = cube.AddComponent<Rigidbody>(); 
         cubeRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         cubeRigidbody.mass = 1f; 
+
         cube.AddComponent<MouseDrag>();
         cube.transform.position = new Vector3(5f, 0.5f, 2f);
 
