@@ -14,14 +14,14 @@ private float scaleTimeout = .05f;
 
     private void OnMouseDown()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, Input.mousePosition.x * 3, Camera.main.transform.position.z * 5);
+        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, -Input.mousePosition.x * 3, -Camera.main.transform.position.z * 3);
         offset = transform.position - Camera.main.ScreenToWorldPoint(mousePosition);
         rb.isKinematic = true;
     }
 
     private void OnMouseDrag()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, Input.mousePosition.x * 3, Camera.main.transform.position.z * 5);
+        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, -Input.mousePosition.x * 3, -Camera.main.transform.position.z * 3);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) + offset;
         transform.position = objPosition;
     }
