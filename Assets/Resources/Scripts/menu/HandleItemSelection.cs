@@ -77,7 +77,6 @@ public void InstantiateNewSquare(int index)
 
         cube.AddComponent<MouseDrag>();
         cube.transform.position = new Vector3(5f, 0.5f, 2f);
-
         itemsDictionary.Add(index, cube);
     }
 }
