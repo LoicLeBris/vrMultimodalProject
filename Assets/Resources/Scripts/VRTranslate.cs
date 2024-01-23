@@ -26,14 +26,14 @@ public class VRTranslate : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            smartUserDisplace(1.3f, 0.0f);
+            smartUserDisplace(.6f, 0.0f);
             playerCam.transform.position += playerCam.transform.forward * m_speed;
             playerReal.GetComponentInChildren<Animator>().SetBool("Walk", true);
             
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            smartUserDisplace(-1.3f, 0.0f);
+            smartUserDisplace(-0.6f, 0.0f);
             playerCam.transform.position += -playerCam.transform.forward * m_speed;
             playerReal.GetComponentInChildren<Animator>().SetBool("Walk", true);
         }
@@ -43,13 +43,13 @@ public class VRTranslate : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            smartUserDisplace(0.0f, -1.3f);
+            smartUserDisplace(0.0f, -0.6f);
             playerCam.transform.eulerAngles -= new Vector3(0.0f, r_speed, 0.0f);
 
         }
         if (Input.GetKey(KeyCode.D))
         {
-            smartUserDisplace(0.0f,1.3f);
+            smartUserDisplace(0.0f,0.6f);
             playerCam.transform.eulerAngles += new Vector3(0.0f, r_speed, 0.0f);
         }
         
