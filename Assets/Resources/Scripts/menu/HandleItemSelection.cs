@@ -15,10 +15,6 @@ public class ItemSelection : MonoBehaviour
 
         switch (index)
         {
-            case 0:
-                prefabToSpawn = Resources.Load("CombatKnifes/knife3a") as GameObject;
-                InstantiateNewObject(index, prefabToSpawn);
-                break;
             default:
                 InstantiateNewSquare(index);
                 break;
