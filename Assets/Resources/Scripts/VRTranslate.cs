@@ -86,7 +86,10 @@ public class VRTranslate : MonoBehaviour
     void curveUser(float trans)
     {
         Vector3 camTrans = playerCam.transform.forward * m_speed;
-        float rotationAngle = 360f * trans * curvature_gain * camTrans.magnitude/ (2 * Mathf.PI);
+        float distanceFromCenter = Vector3.Distance(new Vector3(playerReal.transform.position.x, -1f, playerReal.transform.position.z), new Vector3(-11.13f, -1f, -1f ));
+        Debug.Log("distance from center: "+distanceFromCenter);
+        curvature_gain = Mathf.Lerp(0.01f, .5f, distanceFromCenter);
+        float rotationAngle = 360f * trans * curvature_gain * camTrans.magnitude/ (2 * Mathf.PI); 
         playerReal.transform.Rotate(Vector3.up, rotationAngle);
     }   
 
