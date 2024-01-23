@@ -34,7 +34,7 @@ private float scaleTimeout = .05f;
     private void Update()
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        transform.Translate(Vector3.up * wheelInput * 5.0f, Space.World);
+        transform.Translate(Vector3.up * wheelInput, Space.World);
 
          if (Time.time - lastScaleTime > scaleTimeout)
     {

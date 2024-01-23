@@ -26,14 +26,14 @@ public class VRTranslate : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            smartUserDisplace(.6f, 0.0f);
+            smartUserDisplace(.8f, 0.0f);
             playerCam.transform.position += playerCam.transform.forward * m_speed;
             playerReal.GetComponentInChildren<Animator>().SetBool("Walk", true);
             
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            smartUserDisplace(-0.6f, 0.0f);
+            smartUserDisplace(-0.8f, 0.0f);
             playerCam.transform.position += -playerCam.transform.forward * m_speed;
             playerReal.GetComponentInChildren<Animator>().SetBool("Walk", true);
         }
@@ -43,13 +43,13 @@ public class VRTranslate : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            smartUserDisplace(0.0f, -0.6f);
+            smartUserDisplace(0.0f, -0.8f);
             playerCam.transform.eulerAngles -= new Vector3(0.0f, r_speed, 0.0f);
 
         }
         if (Input.GetKey(KeyCode.D))
         {
-            smartUserDisplace(0.0f,0.6f);
+            smartUserDisplace(0.0f,0.8f);
             playerCam.transform.eulerAngles += new Vector3(0.0f, r_speed, 0.0f);
         }
         
@@ -61,7 +61,6 @@ public class VRTranslate : MonoBehaviour
     {
         float distanceFromCenter = Vector3.Distance(new Vector3(playerReal.transform.position.x, 0, playerReal.transform.position.z), Vector3.zero);
 
-        // Adjust translation and rotation gains based on the distance
         float translate_gain = Mathf.Lerp(0.86f, 1.26f, distanceFromCenter / (10 / 2));
         float rotation_gain = Mathf.Lerp(0.67f, 1.24f, distanceFromCenter / (10 / 2));
 
@@ -87,7 +86,6 @@ public class VRTranslate : MonoBehaviour
     {
         Vector3 camTrans = playerCam.transform.forward * m_speed;
         float distanceFromCenter = Vector3.Distance(new Vector3(playerReal.transform.position.x, -1f, playerReal.transform.position.z), new Vector3(-11.13f, -1f, -1f ));
-        Debug.Log("distance from center: "+distanceFromCenter);
         curvature_gain = Mathf.Lerp(0.01f, .5f, distanceFromCenter);
         float rotationAngle = 360f * trans * curvature_gain * camTrans.magnitude/ (2 * Mathf.PI); 
         playerReal.transform.Rotate(Vector3.up, rotationAngle);

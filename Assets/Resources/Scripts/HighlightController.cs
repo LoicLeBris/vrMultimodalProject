@@ -9,26 +9,24 @@ public class GestionSurbrillanceBoutons : MonoBehaviour
     public GameObject[] objetsASurbriller;
     public Button[] boutons;
     public GameObject text;
-    public static List<string> infos = new List<string> { "Une simple encyclopédie, elle comporte un maximum de connaissances dans un nombre de page limité", "Une canette de Coca... tient... on y trouve quelques traces de rouge à lèvres", "Une bobine de film ancienne, elle est inutilisable sur les télévisions récentes" };
+    public static List<string> infos = new List<string> { "Une simple encyclopï¿½die, elle comporte un maximum de connaissances dans un nombre de page limitï¿½", "Une canette de Coca... tient... on y trouve quelques traces de rouge ï¿½ lï¿½vres", "Une bobine de film ancienne, elle est inutilisable sur les tï¿½lï¿½visions rï¿½centes" };
 
     private int indexBoutonSelectionne = -1;
 
     void Start()
     {
-        // Ajoute les écouteurs de clic aux boutons
         for (int i = 0; i < boutons.Length; i++)
         {
-            int index = i; // Nécessaire pour éviter la capture de variable dans la boucle
+            int index = i; 
             boutons[i].onClick.AddListener(() => OnBoutonClique(index));
         }
     }
 
     void OnBoutonClique(int index)
     {
-        // Désactive la surbrillance de l'objet précédemment sélectionné
+        
         DesactiverSurbrillance();
 
-        // Active la surbrillance sur le nouvel objet sélectionné
         ActiverSurbrillance(index);
     }
 
@@ -36,7 +34,6 @@ public class GestionSurbrillanceBoutons : MonoBehaviour
     {
         indexBoutonSelectionne = index;
 
-        // Vérifie si l'index est valide
         if (indexBoutonSelectionne >= 0 && indexBoutonSelectionne < objetsAControler.Length && indexBoutonSelectionne < objetsASurbriller.Length)
         {
             GameObject objetSelectionne = objetsAControler[indexBoutonSelectionne];
@@ -55,7 +52,6 @@ public class GestionSurbrillanceBoutons : MonoBehaviour
 
     void DesactiverSurbrillance()
     {
-        // Vérifie si l'index est valide
         if (indexBoutonSelectionne >= 0 && indexBoutonSelectionne < objetsAControler.Length && indexBoutonSelectionne < objetsASurbriller.Length)
         {
             GameObject objetSelectionne = objetsAControler[indexBoutonSelectionne];
