@@ -4,5 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/VRWalker.unity
+    guid: b72a5ca6c3a3c4b64be02db91b0b6111
+  - enabled: 0
+    path: Assets/Bookshelf/bookshelf.unity
+    guid: dffec349c69d07d45a65f1e1b59227e7
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 66e6ebd7ad462424f9b59bb4ffc64916, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4e0dde0df7362fe489ac8dd8e5e77767, type: 2}

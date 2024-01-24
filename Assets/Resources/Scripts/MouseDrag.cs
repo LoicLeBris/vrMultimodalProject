@@ -14,22 +14,39 @@ private float scaleTimeout = .05f;
 
     private void OnMouseDown()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, -Input.mousePosition.x * 3, -Camera.main.transform.position.z * 3);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(mousePosition);
-        rb.isKinematic = true;
+        // Convertir la position de la souris en un rayon dans la scène
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // Vérifier s'il y a une collision avec un objet
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Stocker l'offset entre la position de l'objet et le point de collision
+            offset = transform.position - hit.point;
+            rb.isKinematic = true;
+        }
     }
 
     private void OnMouseDrag()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.y * 5, -Input.mousePosition.x * 3, -Camera.main.transform.position.z * 3);
-        Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) + offset;
-        transform.position = objPosition;
+        // Convertir la position de la souris en un rayon dans la scène
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // Vérifier s'il y a une collision avec un objet
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Mettre à jour la position de l'objet en fonction du point de collision et de l'offset
+            transform.position = hit.point + offset;
+        }
     }
 
     private void OnMouseUp()
     {
         rb.isKinematic = false;
     }
+
+
 
     private void Update()
     {
